@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.wk.project</groupId>
+  <artifactId>myproject</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+
+  <packaging>jar</packaging>
+  <description>个人工程</description>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+
+
+    <!-- 版本控制 -->
+    <!-- spring-->
+    <spring-boot.version>2.6.3</spring-boot.version>
+    <spring-boot-maven-plugin.version>2.6.3</spring-boot-maven-plugin.version>
+    <spring-web.version>5.3.19</spring-web.version>
+    <!-- mybatis-->
+    <mybatis-plus-boot-starter.version>3.4.1</mybatis-plus-boot-starter.version>
+    <!--   数据库相关-->
+    <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
+    <spring-jdbc.version>5.3.19</spring-jdbc.version>
+    <!-- 日志-->
+    <slf4j.version>1.7.33</slf4j.version>
+    <logback-core.version>1.2.11</logback-core.version>
+    <!-- common -->
+    <commons-codec.version>1.9</commons-codec.version>
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+    <commons-beanutils.version>1.9.4</commons-beanutils.version>
+    <commons-collections4.version>4.4</commons-collections4.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring-web.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <!--springboot集成mybatis plus-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-jdbc.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>${mybatis-plus-boot-starter.version}</version>
+    </dependency>
+    <!--mysql驱动-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-connector-java.version}</version>
+    </dependency>
+
+    <!-- 适应前后端的加密解密 -->
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons-codec.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>${commons-beanutils.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>${commons-collections4.version}</version>
+    </dependency>
+    <!-- log -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback-core.version}</version>
+    </dependency>
+    <!-- 测试类依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test</artifactId>
+      <version>2.6.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.3.19</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>1.5.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.14</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.mybatis</groupId>-->
+    <!--      <artifactId>mybatis-spring</artifactId>-->
+    <!--      <version>1.3.1</version>-->
+    <!--    </dependency>-->
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.springframework.boot</groupId>-->
+    <!--      <artifactId>spring-boot-autoconfigure</artifactId>-->
+    <!--      <version>2.6.7</version>-->
+    <!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.mybatis</groupId>-->
+    <!--      <artifactId>mybatis-spring</artifactId>-->
+    <!--      <version>1.3.2</version>-->
+    <!--    </dependency>-->
+
+    <!-- 测试类依赖-->
+    <dependency>
+      <groupId>com.longi</groupId>
+      <artifactId>drm-edi</artifactId>
+      <version>3.7.0.3</version>
+      <scope>system</scope>
+      <systemPath>${pom.basedir}/lib/drm-edi-3.7.0.3.jar </systemPath>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+
+
+  <build>
+    <finalName>${project.name}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.wk.project.WebApplication</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
