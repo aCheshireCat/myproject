@@ -31,7 +31,7 @@ public class Fireworks extends Applet implements MouseListener,Runnable
 
     public void paint(Graphics g)
     {
-
+        heardpaint(g);
     }
 
 
@@ -162,6 +162,27 @@ public class Fireworks extends Applet implements MouseListener,Runnable
 
     public void mouseClicked(MouseEvent e)
     {
+    }
+
+
+    public void heardpaint(Graphics g)
+    {
+        double x, y, r;
+        Image OffScreen = createImage(500, 500);
+        Graphics drawOffScreen = OffScreen.getGraphics();
+
+        for (int i = 0; i < 90; i++) {
+            for (int j = 0; j < 90; j++) {
+                r = Math.PI / 45 * i * (1 - Math.sin(Math.PI / 45 * j)) * 18;
+                x = r * Math.cos(Math.PI / 45 * j) * Math.sin(Math.PI / 45 * i)+ 500 / 2-100;
+                y = -r * Math.sin(Math.PI / 45 * j) + 500 / 4-50;
+
+                drawOffScreen.setColor(Color.PINK);
+                drawOffScreen.fillOval((int) x, (int) y, 2, 2);
+            }
+            // 生成图片
+            g.drawImage(OffScreen, 0, 0, this);
+        }
     }
 
 }

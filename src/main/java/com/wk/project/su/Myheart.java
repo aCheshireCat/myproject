@@ -20,7 +20,7 @@ public class Myheart{
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(3);
 
-        frame.setBackground(Color.WHITE);
+        frame.setBackground(Color.BLACK);
         mypanel p=new mypanel();
         frame.add(p);
         frame.setVisible(true);
@@ -139,9 +139,9 @@ class mypanel extends JPanel implements Runnable{
     public void paint(Graphics g)
     {
 
-        moonpaint(g);
+//        moonpaint(g);
         heardpaint(g);
-        snowspaint(g);
+//        snowspaint(g);
 //        fontpaint(g);
     }
     public void run()

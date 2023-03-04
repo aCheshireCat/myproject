@@ -154,7 +154,7 @@
       <artifactId>drm-edi</artifactId>
       <version>3.7.0.3</version>
       <scope>system</scope>
-      <systemPath>${pom.basedir}/lib/drm-edi-3.7.0.3.jar </systemPath>
+      <systemPath>${pom.basedir}/lib/drm-edi-3.7.0.3.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
