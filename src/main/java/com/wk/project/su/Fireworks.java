@@ -25,7 +25,7 @@ public class Fireworks extends Applet implements MouseListener,Runnable
         x = 0;
         y = 0;
         //设置背景色为黑色
-        setBackground(Color.black);
+        setBackground(Color.BLACK);
         addMouseListener(this);
     }
 
