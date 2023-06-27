@@ -6,11 +6,13 @@ import cn.net.drm.io.IOUtils;
 import org.junit.Test;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StreamTest {
 
     private static final String EXCEL = ".xlsx";
-    private static final String DOC = ".docx";
+    private static final String DOC = ".doc";
     private static final String PDF = ".pdf";
     private static final String PNG = ".png";
     @Test
@@ -66,10 +68,13 @@ public class StreamTest {
         OutputStream fos = null;
         try {
             long start = System.currentTimeMillis();
-            String fileName = "LDP代码及版本管理V2.4";
+            String fileName = "LONGI_硅片产品编码标准化治理项目_系统测试报告_MDM与下游系统_V2.0";
             String fileType = DOC;
             String pathName = "D:\\加密解密区\\";
+            String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
             fis = new FileInputStream(new File(pathName +fileName +fileType));
+
             BufferedInputStream bis = new BufferedInputStream(fis);
             byte[] header = new byte[256];
 
@@ -82,7 +87,8 @@ public class StreamTest {
             if (isEncryptFile) {
                 fis = DrmAgent.getInstance().decrypt(bis);
             }
-            fos = new FileOutputStream(pathName +fileName +"-decode"+fileType);
+//            fos = new FileOutputStream(pathName +fileName +"-decode"+fileType);
+            fos = new FileOutputStream(pathName +fileName + dateStr + "." + fileType);
             int len = 0;
             byte[] buffer = new byte[4096];
             while ((len = fis.read(buffer)) > 0) {
