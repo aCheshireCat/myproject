@@ -68,8 +68,8 @@ public class StreamTest {
         OutputStream fos = null;
         try {
             long start = System.currentTimeMillis();
-            String fileName = "LONGI_硅片产品编码标准化治理项目_系统测试报告_MDM与下游系统_V2.0";
-            String fileType = DOC;
+            String fileName = "CRM-OMS集成接口v1.2";
+            String fileType = EXCEL;
             String pathName = "D:\\加密解密区\\";
             String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 
@@ -88,7 +88,7 @@ public class StreamTest {
                 fis = DrmAgent.getInstance().decrypt(bis);
             }
 //            fos = new FileOutputStream(pathName +fileName +"-decode"+fileType);
-            fos = new FileOutputStream(pathName +fileName + dateStr + "." + fileType);
+            fos = new FileOutputStream(pathName +fileName + "_" + dateStr + "." + fileType);
             int len = 0;
             byte[] buffer = new byte[4096];
             while ((len = fis.read(buffer)) > 0) {
