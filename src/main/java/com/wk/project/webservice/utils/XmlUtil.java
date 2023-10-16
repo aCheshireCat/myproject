@@ -1,4 +1,4 @@
-package com.wk.project.utils;
+package com.wk.project.webservice.utils;
 
 import com.wk.project.webservice.info.erp.*;
 
@@ -74,13 +74,13 @@ public class XmlUtil {
         APPSCUXOMOMS2DELX1798393X1X56 X56 = factory.createAPPSCUXOMOMS2DELX1798393X1X56();
         X56.setATTR1(factory.createAPPSCUXOMOMS2DELX1798393X1X56ATTR1("attr1"));
 
-        APPSCUXOMOMS2DELX1798393X1X56 X56_2 = factory.createAPPSCUXOMOMS2DELX1798393X1X56();
-        X56_2.setATTR1(factory.createAPPSCUXOMOMS2DELX1798393X1X56ATTR2("attr2"));
+//        APPSCUXOMOMS2DELX1798393X1X56 X56_2 = factory.createAPPSCUXOMOMS2DELX1798393X1X56();
+//        X56_2.setATTR1(factory.createAPPSCUXOMOMS2DELX1798393X1X56ATTR2("attr2"));
 
         APPSCUXOMOMS2DELX1798393X1X55 X55 = factory.createAPPSCUXOMOMS2DELX1798393X1X55();
 
         X55.getLINESITEM().add(X56);
-        X55.getLINESITEM().add(X56_2);
+//        X55.getLINESITEM().add(X56_2);
         X16.setLINES(factory.createAPPSCUXOMOMS2DELX1798393X1X16LINES(X55));
         X15.getPRODUCERREQUESTDATAITEM().add(X16);
         inputParameters.setPRODUCERREQUESTDATA(factory.createInputParametersPRODUCERREQUESTDATA(

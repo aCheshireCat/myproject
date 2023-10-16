@@ -12,6 +12,7 @@ import java.util.Date;
 public class StreamTest {
 
     private static final String EXCEL = ".xlsx";
+    private static final String DOCX = ".docx";
     private static final String DOC = ".doc";
     private static final String PDF = ".pdf";
     private static final String PNG = ".png";
@@ -68,7 +69,7 @@ public class StreamTest {
         OutputStream fos = null;
         try {
             long start = System.currentTimeMillis();
-            String fileName = "CRM-OMS集成接口v1.2";
+            String fileName = "扩展";
             String fileType = EXCEL;
             String pathName = "D:\\加密解密区\\";
             String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
