@@ -23,6 +23,14 @@ public class SignUtil {
     private final static String accessid = "a8f64e98-6c03-4929-8bb6-8488e6d7a855";
     private final static String secretKey = "becdf2a5-29f4-4637-86eb-4cd87f458847";
 
+
+    private static String getPostMethodSign(String url) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+        return getSign(url,HttpMethod.POST);
+    }
+    private static String getGetMethodSign(String url) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+        return getSign(url,HttpMethod.GET);
+    }
+
     private static String getSign(String url,HttpMethod method) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 
         String timestamp = String.valueOf(System.currentTimeMillis());

@@ -1,8 +1,12 @@
 package com.wk.project.quickbi.signature;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.quickbi.openapi.client.HttpMethod;
 import com.alibaba.quickbi.openapi.common.CommonConstants;
 import com.alibaba.quickbi.openapi.core.util.StringUtils;
+import com.mysql.cj.xdevapi.JsonArray;
+import com.wk.project.quickbi.model.vo.GlobalParam;
+import com.wk.project.quickbi.model.vo.GlobalValueParam;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -24,27 +28,45 @@ public class SignCreator {
 
         String accessid = "a8f64e98-6c03-4929-8bb6-8488e6d7a855";
         String secretKey = "becdf2a5-29f4-4637-86eb-4cd87f458847";
-        String url = "/openapi/v2/data/846b03c53d23";
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        String uuid = UUID.randomUUID().toString();
+        String url = "/openapi/v2/embed/ticket/create";
+//        String timestamp = String.valueOf(System.currentTimeMillis());
+//        String uuid = UUID.randomUUID().toString();
+//        String strToSign = "";
+//        String sign = "";
+        String sign = "UUgfJAC46d+lg+tv4Vj9HbieXuL14BdCMmIzZGI/iRM=";
+        String strToSign = "POST /openapi/v2/embed/ticket/create globalParam=[{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictCode\"},{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictName\"}]&ticketNum=2&worksId=86fa1681-8c97-4d39-8683-3f2aaecc9480 X-Gw-AccessId:a8f64e98-6c03-4929-8bb6-8488e6d7a855 X-Gw-Nonce:1f4224a1-0f65-4357-8fda-cbd349faebd4 X-Gw-Timestamp:1698388940895";
+        String timestamp = "1698395252950";
+        String uuid = "c9d8436c-4021-4108-bdfb-3062747e17b1";
         String method = HttpMethod.POST.name();
+        String globalParam = constractParam();
+        System.out.println(globalParam);
+//        globalParam = percentEncode(globalParam);
+//        System.out.println(globalParam);
+
         Map<String,String> headers = new HashMap<String,String>(){{
             put(CommonConstants.HEADER_ACCESSID,accessid);
             put(CommonConstants.HEADER_TIMESTAMP,timestamp);
             put(CommonConstants.HEADER_NONCE,uuid);
         }};
-        Map<String,String> parameters = new HashMap<String,String>();
+        Map<String,String> parameters = new HashMap<>();
+        parameters.put("worksId","86fa1681-8c97-4d39-8683-3f2aaecc9480");
+        parameters.put("ticketNum","2");
+        parameters.put("globalParam",globalParam);
 
-        System.out.println(timestamp);
+
+        System.out.println(method);
+        System.out.println(url);
+        System.out.println(globalParam);
         System.out.println(uuid);
+        System.out.println(timestamp);
 
-        String string_to_sign = buildStringToSign(url,method,parameters,headers);
-        System.out.println(string_to_sign);
+        strToSign = buildStringToSign(url,method,parameters,headers);
+        System.out.println(strToSign);
 
 //        string_to_sign = percentEncode(string_to_sign);
 //        System.out.println(string_to_sign);
 
-        String sign = sign(string_to_sign,secretKey);
+        sign = sign(strToSign,secretKey);
         System.out.println(sign);
 
 
@@ -150,6 +172,35 @@ public class SignCreator {
         hamcSha256.init(secretKey);
         byte[] result = hamcSha256.doFinal(content.getBytes("UTF-8"));
         return new String(Base64.getEncoder().encode(result));
+    }
+
+
+    private static String constractParam(){
+        List<GlobalParam> paramList = new ArrayList<GlobalParam>(){{
+            add(new GlobalParam(){{
+                setParamKey("dictCode");
+                setJoinType("and");
+                setConditionList(new ArrayList<GlobalValueParam>(){{
+                    add(new GlobalValueParam(){{
+                        setOperate("like");
+                        setValue("case");
+                    }});
+                }});
+            }});
+            add(new GlobalParam(){{
+                setParamKey("dictName");
+                setJoinType("and");
+                setConditionList(new ArrayList<GlobalValueParam>(){{
+                    add(new GlobalValueParam(){{
+                        setOperate("like");
+                        setValue("经典");
+                    }});
+                }});
+            }});
+        }};
+        String paramJson = JSON.toJSONString(paramList);
+
+        return paramJson;
     }
 
 }
