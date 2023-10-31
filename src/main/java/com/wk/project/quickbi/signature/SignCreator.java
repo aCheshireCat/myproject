@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.quickbi.openapi.client.HttpMethod;
 import com.alibaba.quickbi.openapi.common.CommonConstants;
 import com.alibaba.quickbi.openapi.core.util.StringUtils;
-import com.mysql.cj.xdevapi.JsonArray;
 import com.wk.project.quickbi.model.vo.GlobalParam;
 import com.wk.project.quickbi.model.vo.GlobalValueParam;
 
@@ -29,14 +28,14 @@ public class SignCreator {
         String accessid = "a8f64e98-6c03-4929-8bb6-8488e6d7a855";
         String secretKey = "becdf2a5-29f4-4637-86eb-4cd87f458847";
         String url = "/openapi/v2/embed/ticket/create";
-//        String timestamp = String.valueOf(System.currentTimeMillis());
-//        String uuid = UUID.randomUUID().toString();
-//        String strToSign = "";
-//        String sign = "";
-        String sign = "UUgfJAC46d+lg+tv4Vj9HbieXuL14BdCMmIzZGI/iRM=";
-        String strToSign = "POST /openapi/v2/embed/ticket/create globalParam=[{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictCode\"},{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictName\"}]&ticketNum=2&worksId=86fa1681-8c97-4d39-8683-3f2aaecc9480 X-Gw-AccessId:a8f64e98-6c03-4929-8bb6-8488e6d7a855 X-Gw-Nonce:1f4224a1-0f65-4357-8fda-cbd349faebd4 X-Gw-Timestamp:1698388940895";
-        String timestamp = "1698395252950";
-        String uuid = "c9d8436c-4021-4108-bdfb-3062747e17b1";
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String uuid = UUID.randomUUID().toString();
+        String strToSign = "";
+        String sign = "";
+//        String sign = "UUgfJAC46d+lg+tv4Vj9HbieXuL14BdCMmIzZGI/iRM=";
+//        String strToSign = "POST /openapi/v2/embed/ticket/create globalParam=[{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictCode\"},{\"conditionList\":[{\"operate\":\"like\",\"value\":\"\"}],\"joinType\":\"and\",\"paramKey\":\"dictName\"}]&ticketNum=2&worksId=86fa1681-8c97-4d39-8683-3f2aaecc9480 X-Gw-AccessId:a8f64e98-6c03-4929-8bb6-8488e6d7a855 X-Gw-Nonce:1f4224a1-0f65-4357-8fda-cbd349faebd4 X-Gw-Timestamp:1698388940895";
+//        String timestamp = "1698395252950";
+//        String uuid = "c9d8436c-4021-4108-bdfb-3062747e17b1";
         String method = HttpMethod.POST.name();
         String globalParam = constractParam();
         System.out.println(globalParam);
@@ -106,6 +105,7 @@ public class SignCreator {
         // paramters
         if (null != parameters && parameters.size() > 0) {
             String queryString = buildSortedString(parameters, "=", "&");
+            System.out.println("paramters:" + queryString);
             if (StringUtils.isNotEmpty(queryString)) {
                 sb.append(queryString);
                 sb.append(CommonConstants.LF);
@@ -149,6 +149,7 @@ public class SignCreator {
                 sb.append(symbol2);
             }
         }
+        System.out.println("buildSortedString:"+ sb.toString());
         return sb.toString();
     }
 
@@ -175,7 +176,7 @@ public class SignCreator {
     }
 
 
-    private static String constractParam(){
+    private static String constractParam() throws UnsupportedEncodingException {
         List<GlobalParam> paramList = new ArrayList<GlobalParam>(){{
             add(new GlobalParam(){{
                 setParamKey("dictCode");
@@ -193,7 +194,7 @@ public class SignCreator {
                 setConditionList(new ArrayList<GlobalValueParam>(){{
                     add(new GlobalValueParam(){{
                         setOperate("like");
-                        setValue("经典");
+                        setValue(percentEncode("经典"));
                     }});
                 }});
             }});
