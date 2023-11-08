@@ -1,11 +1,18 @@
 package com.wk.project.quickbi.signature;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.quickbi.openapi.HttpClientFactory;
+import com.alibaba.quickbi.openapi.client.FormatType;
 import com.alibaba.quickbi.openapi.client.HttpMethod;
+import com.alibaba.quickbi.openapi.client.HttpRequest;
+import com.alibaba.quickbi.openapi.client.IOpenAPIClient;
 import com.alibaba.quickbi.openapi.common.CommonConstants;
+import com.alibaba.quickbi.openapi.core.exception.SDKException;
 import com.alibaba.quickbi.openapi.core.util.StringUtils;
 import com.wk.project.quickbi.model.vo.GlobalParam;
 import com.wk.project.quickbi.model.vo.GlobalValueParam;
+import org.apache.commons.collections4.MapUtils;
+import org.junit.Test;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,12 +28,13 @@ import java.util.*;
  * @Description
  **/
 public class SignCreator {
+    final static String accessid = "a8f64e98-6c03-4929-8bb6-8488e6d7a855";
+    final static String secretKey = "becdf2a5-29f4-4637-86eb-4cd87f458847";
 
+    final static String host = "https://quickbi.longi.com";
 
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 
-        String accessid = "a8f64e98-6c03-4929-8bb6-8488e6d7a855";
-        String secretKey = "becdf2a5-29f4-4637-86eb-4cd87f458847";
         String url = "/openapi/v2/embed/ticket/create";
         String timestamp = String.valueOf(System.currentTimeMillis());
         String uuid = UUID.randomUUID().toString();
@@ -202,6 +210,49 @@ public class SignCreator {
         String paramJson = JSON.toJSONString(paramList);
 
         return paramJson;
+    }
+
+
+    private static IOpenAPIClient client =
+            HttpClientFactory.buildDefaultClient(host, null, false,
+                    accessid, secretKey, true);
+    public static String post(String uri, Map<String,
+            String> parameterMap, boolean debug, FormatType formatType) throws SDKException {
+        HttpRequest request = HttpRequest.build()
+                .setUri(uri)
+                .setMethod(HttpMethod.POST);
+
+        //添加参数
+        if (MapUtils.isNotEmpty(parameterMap)) {
+            parameterMap.forEach(request::addParameter);
+        }
+        switch (formatType){
+            case FORM:request.setHttpContentType(FormatType.FORM);
+                break;
+            case JSON:request.setHttpContentType(FormatType.JSON);
+                break;
+            default:
+        }
+        if(debug){
+            request.addHeader("X-Gw-Debug", "true");
+        }
+
+        return client.syncExecute(request);
+
+    }
+
+    @Test
+    public void testPost() throws SDKException {
+        String uri = "/openapi/v2/embed/ticket/create";
+        String value = URLEncoder.encode("经典");
+        String param = "[{\"conditionList\":[{\"operate\":\"like\",\"value\":\"case\"}],\"joinType\":\"and\",\"paramKey\":\"dictCode\"},{\"conditionList\":[{\"operate\":\"like\",\"value\":\"" + value + "\"}],\"joinType\":\"and\",\"paramKey\":\"dictName\"}]";
+        Map<String,String> paramMap = new HashMap<String,String>(){{
+            put("worksId", "86fa1681-8c97-4d39-8683-3f2aaecc9480");
+            put("ticketNum", "2");
+            put("globalParam",URLEncoder.encode(param));
+        }};
+        String result = post(uri,paramMap,true,FormatType.FORM);
+        System.out.println(result);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.wk.project.quickbi.model.entity;
 
-import com.wk.project.quickbi.constants.WorkType;
+import com.wk.project.quickbi.constants.TreeTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ProductWork {
 
     private String worksId;
-    private WorkType workType;
+    private TreeTypeEnum treeTypeEnum;
     private String workName;
     private String workspaceId;
     private String workspaceName;

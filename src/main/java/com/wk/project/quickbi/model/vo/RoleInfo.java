@@ -1,4 +1,4 @@
-package com.wk.project.quickbi.model.entity;
+package com.wk.project.quickbi.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductWorkDirectory {
+public class RoleInfo {
 
-    private String id;
-    private String pathId;
-    private String pathName;
-
+    private int roleId;
+    private String roleCode;
+    private String roleName;
 
 }
