@@ -14,6 +14,7 @@ public class StreamTest {
     private static final String EXCEL = ".xlsx";
     private static final String DOCX = ".docx";
     private static final String DOC = ".doc";
+    private static final String PPTX = ".pptx";
     private static final String PDF = ".pdf";
     private static final String PNG = ".png";
     @Test
@@ -69,9 +70,11 @@ public class StreamTest {
         OutputStream fos = null;
         try {
             long start = System.currentTimeMillis();
-            String fileName = "扩展";
-            String fileType = EXCEL;
+            String fileName = "LONGI_软件开发04_数据库实体设计文档规范_1.1版_V1.1";
+            String fileType = DOCX;
             String pathName = "D:\\加密解密区\\";
+            String secondPathName= "文档\\";
+            pathName = pathName+secondPathName;
             String dateStr = new SimpleDateFormat("yyyyMMdd").format(new Date());
 
             fis = new FileInputStream(new File(pathName +fileName +fileType));
