@@ -1,0 +1,11 @@
+drm.serverip=10.0.1.100
+#drm.serverip=efs.longi.com
+drm.port=8600
+drm.user=drmsrm
+drm.password=SzJX4Fdn
+#sdkoffline policy save path
+policy.path=/tmp
+#min
+policy.refresh.interval=129600
+drm.secure=true
+drm.path=agent
