@@ -1,9 +1,15 @@
 package com.wk.project.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * @Auther weikai2
@@ -22,4 +28,11 @@ public class UserLoginRequestVo implements Serializable {
 
     @ApiModelProperty("密码")
     private String password;
+
+    @ApiModelProperty("创建日期")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
+    private LocalDate creationDate;
 }
